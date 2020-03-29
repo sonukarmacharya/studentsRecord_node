@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Search Students</h1>
+    <form method="POST" action="/search">
+      Name:<input type="text" name="name"><br><br>
+      Class:<input type="text" name="class"><br><br>
+      <input type="submit" value="search">
+    </form>
+    <h1><%= title %></h1>
+    <table>
+      <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Class</th>
+      <th>Phone number</th>
+      <th>Image</th>
+      <th>Action</th>
+      </tr>
+     
+        <% if(records.length>0){
+           records.forEach(function(row){
+             %>
+        <tr>
+          <td><%= row.name %></td>
+          <td><%= row.email%></td>
+          <td><%= row.address%></td>
+          <td><%= row.class%></td>
+          <td><%=  row.phnumber%></td>
+         <td><img src="./uploads/<%= row.imagename %>" alt="image" style="width:20%;height:20%;margin:5px auto;">
+         </td> 
+          <td><a href="/edit/<%= row._id%>">edit</a> 
+            <a href="/delete/<%= row._id%>">delete</a></td>
+         
+        </tr>
+        <%})}
+        else{
+          %>
+          <tr><td>No records found</td></tr>
+          <%
+        }%>%>
+    </table><br><br><br>
+    <a href="/">back</a>
+  </body>
+</html>
